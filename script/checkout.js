@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js';
+import {cart,removeFromCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 import {formatCurrency} from './utils/money.js';
 
@@ -15,14 +15,7 @@ cart.forEach((CartItem)=>{
     }
    })
  
-  //  if (matchingProduct){ //如果matchingItem不为空，即在cart中存在
-  //   matchingItem.quantity += 1; //则数量+1
-  //  } else{ //否则，则将该产品加入到cart中
-  //   cart.push({
-  //     productId: productId,
-  //     quantity: 1
-  //     })
-  //  }
+
   cartSunmaryHTML +=
   `
   <div class="cart-item-container">
@@ -47,7 +40,7 @@ cart.forEach((CartItem)=>{
           <span class="update-quantity-link link-primary">
             Update
           </span>
-          <span class="delete-quantity-link link-primary">
+          <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
             Delete
           </span>
         </div>
@@ -98,3 +91,15 @@ cart.forEach((CartItem)=>{
 
 document.querySelector('.order-summary')
 .innerHTML = cartSunmaryHTML;
+
+
+document.querySelectorAll('.js-delete-link')
+.forEach((link) => {
+  link.addEventListener('click', ()=>{
+    console.log('hello')
+    const productId = link.dataset.productId;//需要知道点击的哪个产品：通过在button上面加产品id来获取id
+    removeFromCart(productId);
+    console.log(cart);
+
+  })
+})
