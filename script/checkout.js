@@ -18,7 +18,8 @@ cart.forEach((CartItem)=>{
 
   cartSunmaryHTML +=
   `
-  <div class="cart-item-container">
+  <div class="cart-item-container 
+    js-cart-item-container-${matchingProduct.id}">
     <div class="delivery-date">
       Delivery date: Tuesday, June 21
     </div>
@@ -96,10 +97,13 @@ document.querySelector('.order-summary')
 document.querySelectorAll('.js-delete-link')
 .forEach((link) => {
   link.addEventListener('click', ()=>{
-    console.log('hello')
     const productId = link.dataset.productId;//需要知道点击的哪个产品：通过在button上面加产品id来获取id
     removeFromCart(productId);
-    console.log(cart);
+    
 
+    const container = document.querySelector(
+      `.js-cart-item-container-${productId}`
+      );
+    container.remove();
   })
 })
