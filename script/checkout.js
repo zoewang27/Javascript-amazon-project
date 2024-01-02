@@ -1,7 +1,7 @@
 import { renderOrderSummary } from './checkout/orderSummary.js';
-
+import { renderPaymentSummary } from './checkout/paymentSummary.js';
 renderOrderSummary() //调用函数
-
+renderPaymentSummary()
 /*
 mvc:
 1, model: save and manages the data
