@@ -23,8 +23,8 @@ function saveToStorage(){
 
 
 export function addToCart(productId){
+  //1, loop through the cart and find the product
   let matchingItem; 
-
   cart.forEach((cartItem)=>{ //循环对比cart里面的productId
    if (productId === cartItem.productId) { 
      matchingItem = cartItem; //找到后赋值给matchingItem
@@ -56,4 +56,19 @@ export function removeFromCart(productId){
   saveToStorage()
 }
 
-// function updateDeliveryOption(productId, deliveryO)
+//点击选项时，更新所选的选项
+export function updateDeliveryOption(productId, deliveryOptionId){
+  //1, loop through the cart and find the product
+  let matchingItem; 
+  cart.forEach((cartItem)=>{ 
+   if (productId === cartItem.productId) { 
+     matchingItem = cartItem; 
+   }
+  })
+
+  //2,update the deliveryOptionId of the product
+  matchingItem.deliveryOptionId = deliveryOptionId;
+
+  //3，update localStoreage
+  saveToStorage()
+}
